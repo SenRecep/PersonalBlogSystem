@@ -1,0 +1,26 @@
+﻿@page "/"
+@inject IHttpCategoryService categoryService
+
+<PageTitle>Blogs</PageTitle>
+
+
+@if (Categories is null)
+{
+    <h5>Loading...</h5>
+}
+else
+{
+    foreach (var category in Categories)
+    {
+        <CategoryCard Category="category" Breadcrumbs="new()" />
+    }
+}
+
+
+@code {
+    private IEnumerable<CategoryDto>? Categories { get; set; }
+    protected override async Task OnInitializedAsync()
+    {
+        Categories = await categoryService.GetLoadedCategories();
+    }
+}

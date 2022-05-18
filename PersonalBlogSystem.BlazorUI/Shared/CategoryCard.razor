@@ -1,0 +1,38 @@
+﻿@if (Category is not null)
+{
+    <section id="@Category.Id.ToString().Replace('-','_')">
+        <h4>@Category.Name</h4>
+        <hr />
+        @if (Category.Blogs is not null && Category.Blogs.Count() > 0)
+            @foreach (var blog in Category.Blogs)
+            {
+                <BlogCard Blog="blog" Breadcrumbs="Breadcrumbs?.ToList()"/>
+            }
+        @if (Category.Categories is not null && Category.Categories.Count() > 0)
+            @foreach (var category in Category.Categories)
+            {
+                <CategoryCard Category="category" Breadcrumbs="Breadcrumbs?.ToList()" />
+            }
+    </section>
+
+}
+
+
+@code {
+    [Parameter]
+    public CategoryDto? Category { get; set; }
+
+    [Parameter]
+    public List<Breadcrumb>? Breadcrumbs { get; set; }
+
+    protected override void OnInitialized()
+    {
+        Breadcrumbs?.Add(new()
+            {
+                Name = Category?.Name,
+                Link = Category?.Id.ToString(),
+            });
+        base.OnInitialized();
+    }
+
+}

@@ -1,0 +1,26 @@
+﻿@using Blazored.Toast.Configuration
+@inherits LayoutComponentBase
+
+<div class="page">
+    <div class="sidebar">
+        <NavMenu />
+    </div>
+
+    <main>
+        <div class="top-row px-4">
+           <h3 class="mb-0">Recep ŞEN Personal Blog System</h3>
+        </div>
+
+        <article class="content px-4">
+            @Body
+        </article>
+    </main>
+</div>
+
+
+<BlazoredToasts Position="ToastPosition.TopRight"
+                Timeout="5"
+                IconType="IconType.FontAwesome"
+                SuccessClass="success-toast-override"
+                SuccessIcon="fa fa-thumbs-up"
+                ErrorIcon="fa fa-bug" />

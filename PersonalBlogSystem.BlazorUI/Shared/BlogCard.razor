@@ -1,0 +1,28 @@
+﻿@if (Blog is not null)
+{
+    <div class="card mb-3">
+        <div class="card-header">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb mb-0">
+                     @if (Breadcrumbs is not null)
+                        @foreach (var item in Breadcrumbs)
+                        {
+                            <li class="breadcrumb-item"><a href="#@item.Link?.Replace('-','_')">@item.Name</a></li>
+                        }
+                </ol>
+            </nav>
+        </div>
+        <div class="card-body">
+            <h5>@Blog.Title</h5>
+            <p>@Blog.Content</p>
+        </div>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public BlogDto? Blog { get; set; }
+
+    [Parameter]
+    public List<Breadcrumb>? Breadcrumbs { get; set; }
+}
